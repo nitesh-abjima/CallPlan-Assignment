@@ -7,11 +7,11 @@
 <h1>Call Plan</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create"><button type="button" class="btn btn-outline-success">Create new</button></a>
 </p>
-<table class="table table-responsive table-bordered table-hover">
+<table class="table table-responsive table-border ">
     <thead>
-        <tr class="table-active">
+        <tr class="table-active table-dark">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Complete)
             </th>
             <th>
-                More
+                MORE
             </th>
         </tr>
     </thead>
@@ -45,7 +45,16 @@
                         @Html.DisplayFor(modelItem => item.VisitType)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Complete)
+                        @*@Html.DisplayFor(modelItem => item.Complete)*@
+                        @*@(item.Complete ? "Yes" : "No")*@
+                        @if(item.Complete)
+                        {
+                            <button type="button" class="btn btn-success">Yes</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-danger">No</button>
+                        }
                     </td>
                     <td>
                         @*<div class="dropdown">
@@ -58,9 +67,27 @@
                                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                             </div>
                         </div>*@
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        @*<div class="dropdown dropdown-hover ">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                ...
+                            </button>
+                            <div class="dropdown-menu  dropdown-hover-menu " aria-labelledby="triggerId">
+                                <button class="dropdown-item" href="#">Action</button>
+                                <button class="dropdown-item disabled" href="#">Disabled action</button>
+                            </div>
+                        </div>*@
+                        <div class="dropdown">
+                            <button class="dropbtn">...</button>
+                            <div class="dropdown-content">
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </div>
+                        </div>
+                        @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                     </td>
                 </tr>
             }
