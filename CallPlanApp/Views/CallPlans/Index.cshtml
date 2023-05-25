@@ -6,10 +6,14 @@
 
 <h1>Call Plan</h1>
 
-<p>
-    <a asp-action="Create"><button type="button" style="float:right" class="btn btn-primary">ADD CALL PLAN</button></a>
-</p>
-<div>   
+
+@*<p>
+    <a asp-action="Create"><button type="button" style="float:right" class="btn btn-primary" >ADD CALL PLAN</button></a>
+</p>*@
+<button type="button" style="float:right" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCallPlan">
+    Add Call Plan
+</button>
+
 <table class="table table-responsive table-border ">
     <thead>
         <tr class="table-active table-dark">
@@ -48,7 +52,7 @@
                     <td>
                         @*@Html.DisplayFor(modelItem => item.Complete)*@
                         @*@(item.Complete ? "Yes" : "No")*@
-                        @if(item.Complete)
+                        @if (item.Complete)
                         {
                             <button type="button" class="btn btn-success">Yes</button>
                         }
@@ -59,44 +63,47 @@
                     </td>
                     <td>
                         @*<div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                ...
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </div>
-                        </div>*@
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
+                ...
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </div>
+                </div>*@
                         @*<div class="dropdown dropdown-hover ">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                ...
-                            </button>
-                            <div class="dropdown-menu  dropdown-hover-menu " aria-labelledby="triggerId">
-                                <button class="dropdown-item" href="#">Action</button>
-                                <button class="dropdown-item disabled" href="#">Disabled action</button>
-                            </div>
-                        </div>*@
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                ...
+                </button>
+                <div class="dropdown-menu  dropdown-hover-menu " aria-labelledby="triggerId">
+                <button class="dropdown-item" href="#">Action</button>
+                <button class="dropdown-item disabled" href="#">Disabled action</button>
+                </div>
+                </div>*@
                         <div class="dropdown">
                             <button class="dropbtn">...</button>
                             <div class="dropdown-content">
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a data-bs-toggle="modal"
+                                   data-bs-target="@("#EditCallPlan")"
+                                   data-bs-url="@Url.Action($"Edit/{item.Id}")">Edit</a>
                                 <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                             </div>
                         </div>
                         @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                     </td>
                 </tr>
+                @await Html.PartialAsync("_EditCallPlanPartialView", item);
             }
         }
         else
         {
             <tr>
-                <td colspan= "5">
+                <td colspan="5">
                     <div>
                         No data available at this moment!
                     </div>
@@ -106,4 +113,6 @@
 
     </tbody>
 </table>
-</div>
+
+@await Html.PartialAsync("_CallPlanPartialView", new CallPlan())
+

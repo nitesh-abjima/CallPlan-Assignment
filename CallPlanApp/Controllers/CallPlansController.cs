@@ -18,6 +18,7 @@ namespace CallPlanApp.Controllers
             _context = context;
         }
 
+
         // GET: CallPlans
         public async Task<IActionResult> Index()
         {
@@ -43,9 +44,10 @@ namespace CallPlanApp.Controllers
         }
 
         // GET: CallPlans/Create
-        public IActionResult Create()
+        public IActionResult Create()   
         {
-            return View();
+            CallPlan callPlan = new CallPlan();
+            return PartialView("_CallPlanPartialView", callPlan);
         }
 
         // POST: CallPlans/Create
@@ -57,11 +59,11 @@ namespace CallPlanApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(callPlan);
+                _context.CallPlans.Add(callPlan);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            return View(callPlan);
+            return PartialView("_CallPlanPartialView", callPlan);
         }
 
         // GET: CallPlans/Edit/5
@@ -77,7 +79,7 @@ namespace CallPlanApp.Controllers
             {
                 return NotFound();
             }
-            return View(callPlan);
+            return PartialView("_EditCallPlanPartialView", callPlan);
         }
 
         // POST: CallPlans/Edit/5
