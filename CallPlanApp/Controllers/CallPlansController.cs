@@ -40,7 +40,7 @@ namespace CallPlanApp.Controllers
                 return NotFound();
             }
 
-            return View(callPlan);
+            return PartialView("_DetailsCallPlanPartialView", callPlan); ;
         }
 
         // GET: CallPlans/Create
@@ -114,7 +114,7 @@ namespace CallPlanApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(callPlan);
+            return PartialView("_EditCallPlanPartialView", callPlan);
         }
 
         // GET: CallPlans/Delete/5
@@ -132,7 +132,7 @@ namespace CallPlanApp.Controllers
                 return NotFound();
             }
 
-            return View(callPlan);
+            return PartialView("_DeleteCallPlanPartialView", callPlan); ;
         }
 
         // POST: CallPlans/Delete/5

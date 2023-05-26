@@ -40,6 +40,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsbFBsYW5zXF9DYWxsUGxhblBhcnRpYWxWaWV3LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/NiteshAgarwal/Documents/GIT/CallPlan-Assignment/CallPlanApp/Views/CallPlans/_DeleteCallPlanPartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsbFBsYW5zXF9EZWxldGVDYWxsUGxhblBhcnRpYWxWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/NiteshAgarwal/Documents/GIT/CallPlan-Assignment/CallPlanApp/Views/CallPlans/_DetailsCallPlanPartialView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsbFBsYW5zXF9EZXRhaWxzQ2FsbFBsYW5QYXJ0aWFsVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/NiteshAgarwal/Documents/GIT/CallPlan-Assignment/CallPlanApp/Views/CallPlans/_EditCallPlanPartialView.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsbFBsYW5zXF9FZGl0Q2FsbFBsYW5QYXJ0aWFsVmlldy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
