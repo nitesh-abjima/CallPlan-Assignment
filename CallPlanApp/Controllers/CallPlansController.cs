@@ -79,7 +79,7 @@ namespace CallPlanApp.Controllers
             {
                 return NotFound();
             }
-            return PartialView("_EditCallPlanPartialView", callPlan);
+            return PartialView("_EditCallPlanPartialView_new", callPlan);
         }
 
         // POST: CallPlans/Edit/5
@@ -87,7 +87,7 @@ namespace CallPlanApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,StartDate,VisitType,Complete")] CallPlan callPlan)
+        public async Task<IActionResult> Edit(int id, CallPlan callPlan)
         {
             if (id != callPlan.Id)
             {
@@ -112,9 +112,9 @@ namespace CallPlanApp.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
-            return PartialView("_EditCallPlanPartialView", callPlan);
+            return PartialView("_EditCallPlanPartialView_new", callPlan);
         }
 
         // GET: CallPlans/Delete/5

@@ -62,48 +62,31 @@
                         }
                     </td>
                     <td>
-                        @*<div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                ...
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </div>
-                </div>*@
-                        @*<div class="dropdown dropdown-hover ">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                ...
-                </button>
-                <div class="dropdown-menu  dropdown-hover-menu " aria-labelledby="triggerId">
-                <button class="dropdown-item" href="#">Action</button>
-                <button class="dropdown-item disabled" href="#">Disabled action</button>
-                </div>
-                </div>*@
                         <div class="dropdown">
                             <button class="dropbtn">...</button>
                             <div class="dropdown-content">
-                                <a data-bs-toggle="modal"
+                                <a @*data-bs-toggle="modal"
                                    data-bs-target="@("#EditCallPlan-"+ item.Id)"
-                                   data-bs-url="@Url.Action($"Edit/{item.Id}")">Edit</a>
-                                <a data-bs-toggle="modal"
+                                   data-bs-url="@Url.Action($"Edit/{item.Id}")"*@
+                                   onclick="Details(@item.Id)">Edit</a>
+                                <a @*data-bs-toggle="modal"
                                    data-bs-target="@("#DetailsCallPlan-" + item.Id)"
-                                   data-bs-url="@Url.Action($"Details/{item.Id}")">Details</a>
+                                   data-bs-url="@Url.Action($"Details/{item.Id}")"*@
+                                   onclick="Details(@item.Id)">Details</a>
                                 <a data-bs-toggle="modal"
                                    data-bs-target="@("#DeleteCallPlan-" + item.Id)"
                                    data-bs-url="@Url.Action($"Delete/{item.Id}")">Delete</a>
                             </div>
+                                 @await Html.PartialAsync("_EditCallPlanPartialView_new", item)
+                                 @await Html.PartialAsync("_DeleteCallPlanPartialView", item)
+                                 @await Html.PartialAsync("_DetailsCallPlanPartialView", item)
                         </div>
                         @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                     </td>
                 </tr>
-                @await Html.PartialAsync("_EditCallPlanPartialView", item);
-                @await Html.PartialAsync("_DeleteCallPlanPartialView", item);
-                @await Html.PartialAsync("_DetailsCallPlanPartialView", item)
+                
             }
         }
         else
@@ -119,6 +102,30 @@
 
     </tbody>
 </table>
+
+@section scripts{
+    <script>
+        function Details(id) {
+            console.log(id,"id");
+            $.get("@Url.Action("Details","CallPlans")/" + id,
+                function (data) {
+                    $('#DetailsCallPlan').Val(id);
+                });
+
+                $("#DetailsCallPlan").modal("show");
+        }
+
+        function Edit(id) {
+            console.log(id,"id");
+            $.get("@Url.Action("Edit","CallPlans")/" + id,
+                function (data) {
+                    $('#EditCallPlan').Val(id);
+                });
+
+                $("#EditCallPlan").modal("show");
+        }
+    </script>
+}
 
 @await Html.PartialAsync("_CallPlanPartialView", new CallPlan())
 
