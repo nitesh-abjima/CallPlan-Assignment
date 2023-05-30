@@ -44,7 +44,7 @@ namespace CallPlanApp.Controllers
         }
 
         // GET: CallPlans/Create
-        public IActionResult Create()   
+        public IActionResult Create()
         {
             CallPlan callPlan = new CallPlan();
             return PartialView("_CallPlanPartialView", callPlan);
@@ -55,7 +55,7 @@ namespace CallPlanApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( CallPlan callPlan)
+        public async Task<IActionResult> Create(CallPlan callPlan)
         {
             if (ModelState.IsValid)
             {
@@ -67,19 +67,20 @@ namespace CallPlanApp.Controllers
         }
 
         // GET: CallPlans/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<JsonResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
 
             var callPlan = await _context.CallPlans.FindAsync(id);
-            if (callPlan == null)
-            {
-                return NotFound();
-            }
-            return PartialView("_EditCallPlanPartialView_new", callPlan);
+            //if (callPlan == null)
+            //{
+            //    return NotFound();
+            //}
+            //return Json("_EditCallPlanPartialView_new", callPlan);
+            return new JsonResult(new { Data = new { callPlan = callPlan }});
         }
 
         // POST: CallPlans/Edit/5

@@ -66,27 +66,27 @@
                             <button class="dropbtn">...</button>
                             <div class="dropdown-content">
                                 <a @*data-bs-toggle="modal"
-                                   data-bs-target="@("#EditCallPlan-"+ item.Id)"
-                                   data-bs-url="@Url.Action($"Edit/{item.Id}")"*@
-                                   onclick="Details(@item.Id)">Edit</a>
-                                <a @*data-bs-toggle="modal"
+                           data-bs-target="@("#EditCallPlan-"+ item.Id)"
+                           data-bs-url="@Url.Action($"Edit/{item.Id}")"*@
+                                   onclick="Edit(@item.Id)">Edit</a>
+                                <a data-bs-toggle="modal"
                                    data-bs-target="@("#DetailsCallPlan-" + item.Id)"
-                                   data-bs-url="@Url.Action($"Details/{item.Id}")"*@
-                                   onclick="Details(@item.Id)">Details</a>
+                                   data-bs-url="@Url.Action($"Details/{item.Id}")"
+                                @*onclick="Details(@item.Id)"*@>Details</a>
                                 <a data-bs-toggle="modal"
                                    data-bs-target="@("#DeleteCallPlan-" + item.Id)"
                                    data-bs-url="@Url.Action($"Delete/{item.Id}")">Delete</a>
                             </div>
-                                 @await Html.PartialAsync("_EditCallPlanPartialView_new", item)
-                                 @await Html.PartialAsync("_DeleteCallPlanPartialView", item)
-                                 @await Html.PartialAsync("_DetailsCallPlanPartialView", item)
+                            @await Html.PartialAsync("_EditCallPlanPartialView_new", item)
+                            @await Html.PartialAsync("_DeleteCallPlanPartialView", item)
+                            @await Html.PartialAsync("_DetailsCallPlanPartialView", item)
                         </div>
                         @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
                     </td>
                 </tr>
-                
+
             }
         }
         else
@@ -105,25 +105,56 @@
 
 @section scripts{
     <script>
-        function Details(id) {
-            console.log(id,"id");
-            $.get("@Url.Action("Details","CallPlans")/" + id,
-                function (data) {
-                    $('#DetailsCallPlan').Val(id);
-                });
-
-                $("#DetailsCallPlan").modal("show");
-        }
 
         function Edit(id) {
-            console.log(id,"id");
-            $.get("@Url.Action("Edit","CallPlans")/" + id,
-                function (data) {
-                    $('#EditCallPlan').Val(id);
-                });
+            $.ajax({
+                type: 'GET',
+                url: '/CallPlans/Edit?Id=' + id,
+                dataType: 'JSON',
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log(data);
+                    isNew = false;
 
-                $("#EditCallPlan").modal("show");
+                    ID = data.id;
+                    $('#Id').val(data.data.callPlan.id);
+                    $('#Name').val(data.data.callPlan.name);
+                    var newDate = data.data.callPlan.startDate.toString('dd-MM-yyyy');
+                    $('#StartDate').val(newDate);
+                    $('#VisitType').val(data.data.callPlan.visitType);
+                    
+
+                    $("#EditCallPlan").modal("show");
+
+                }
+            });
         }
+                        //function Edit(id) {
+                //    console.log(id,"id");
+                //    $.get("@Url.Action("Edit","CallPlans")/" + id,
+                //        function (data) {
+                //            console.log("data",data)
+                //            //$('#EditCallPlan').Val(id);
+                //            $('#EditCallPlan').val(data.Result.id);
+                //            $('#EditCallPlan').val($(this).data('Name'));
+                //            $("#EditCallPlan").modal("show");
+                //        });
+
+
+                //}
+
+                //function Details(id) {
+                //    console.log(id, "id");
+                //    $.get("@Url.Action("Details","CallPlans")/" + id,
+                //        function (data) {
+                //            //$('.modal fade').html(data);
+                //            $('.modal-body').val($(this).data('id'));
+                //            $('#partial').val($(this).data('Name'));
+                //            $("#DetailsCallPlan").modal("show");
+                //        });
+
+
+                //}
     </script>
 }
 
