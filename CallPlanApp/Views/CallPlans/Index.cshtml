@@ -119,8 +119,26 @@
                     ID = data.id;
                     $('#Id').val(data.data.callPlan.id);
                     $('#Name').val(data.data.callPlan.name);
-                    var newDate = data.data.callPlan.startDate.toString('dd-MM-yyyy');
-                    $('#StartDate').val(newDate);
+                    //var newDate = data.data.callPlan.startDate.toString('dd-MM-yyyy');
+                    
+                    let result = '';
+
+
+                    //result = data.data.callPlan.startDate.toISOString().substring(0, 10);
+                    function formatDate(date) {
+                        var d = new Date(date),
+                            month = '' + (d.getMonth() + 1),
+                            day = '' + d.getDate(),
+                            year = d.getFullYear();
+
+                        if (month.length < 2) month = '0' + month;
+                        if (day.length < 2) day = '0' + day;
+
+                        return [year, month, day].join('-');
+                    }
+                    result = formatDate(data.data.callPlan.startDate)
+                    //var newDate = data.data.callPlan.startDate.Date.ToString("yyyy-MM-dd");
+                    $('#StartDate').val(result);
                     $('#VisitType').val(data.data.callPlan.visitType);
                     
 
@@ -129,32 +147,6 @@
                 }
             });
         }
-                        //function Edit(id) {
-                //    console.log(id,"id");
-                //    $.get("@Url.Action("Edit","CallPlans")/" + id,
-                //        function (data) {
-                //            console.log("data",data)
-                //            //$('#EditCallPlan').Val(id);
-                //            $('#EditCallPlan').val(data.Result.id);
-                //            $('#EditCallPlan').val($(this).data('Name'));
-                //            $("#EditCallPlan").modal("show");
-                //        });
-
-
-                //}
-
-                //function Details(id) {
-                //    console.log(id, "id");
-                //    $.get("@Url.Action("Details","CallPlans")/" + id,
-                //        function (data) {
-                //            //$('.modal fade').html(data);
-                //            $('.modal-body').val($(this).data('id'));
-                //            $('#partial').val($(this).data('Name'));
-                //            $("#DetailsCallPlan").modal("show");
-                //        });
-
-
-                //}
     </script>
 }
 
